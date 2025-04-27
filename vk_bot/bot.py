@@ -32,11 +32,26 @@ def keyboard_run(keyboard, uid, message):
         print(f'Произошла ошибка API: {e}')
 
 
+def send_to_admin(uid, m_text):
+    try:
+        f = open('adminid.txt', 'r')
+        a_id = list(f)[0]
+        f.close()
+        write_msg(int(a_id), m_text)
+    except FileNotFoundError:
+        write_msg(uid, not_available)
+
+
 print('Чат-бот работает')
 for event in longpoll.listen():
     if event.type == VkEventType.MESSAGE_NEW and event.to_me:
         user_id = event.user_id
-        message_text = str(event.text).strip().lower()
+        message_text = str(event.text).strip()
+        if message_text[0] == '#':
+            send_to_admin(user_id, message_text[1:])
+            continue
+        else:
+            message_text = message_text.lower()
         if message_text == 'моего вопроса нет в списке':
             write_msg(user_id, not_in_list)
         elif message_text == 'faq':
@@ -49,6 +64,8 @@ for event in longpoll.listen():
         elif message_text == 'что необходимо принести?':
             write_msg(user_id, requirements)
 
+        elif message_text == 'подать заявку':
+            write_msg(user_id, send_application)
         elif message_text == 'запись в автошколу':
             keyboard_run(keyboard_enrollment, user_id, generic)
         elif message_text == 'как записаться?':

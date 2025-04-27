@@ -29,6 +29,9 @@ keyboard_enrollment = json.dumps({
     'one_time': False,
     'buttons': [
         [
+            {'action': {'type': 'text', 'label': 'Подать заявку'}, 'color': 'primary'}
+        ],
+        [
             {'action': {'type': 'text', 'label': 'Как записаться?'}, 'color': 'primary'},
             {'action': {'type': 'text', 'label': 'Начало занятий'}, 'color': 'primary'}
         ],
