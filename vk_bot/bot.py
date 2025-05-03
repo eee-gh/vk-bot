@@ -3,7 +3,9 @@ from keyboards import *
 from messages import *
 from vk_api.longpoll import VkLongPoll, VkEventType
 
-TOKEN = 'vk1.a.UW1OFkt239Ccju0el1d9HyQ2phngjZZfZfp5pmP3QlyP5aT8NxmttAW3FGWfI0aCnX7__IFkUgkA0CKbeiQW7mAWqFxHLSf5K1vLrsEZFS4ppaQHu32ABQBIomKuk-IGznIS0ZB2X8D9m9375O6SCvZXieCBy-kPntVhtNZpnVldjLObgwmuh7on3y2fukbse0KQE-gTT58_ABMGaqtASQ'
+t = open('token.txt')
+TOKEN = list(t)[0]
+t.close()
 vk_session = vk_api.VkApi(token=TOKEN)
 vk = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
