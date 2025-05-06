@@ -40,6 +40,7 @@ def send_to_admin(uid, m_text):
         a_id = list(f)[0]
         f.close()
         write_msg(int(a_id), m_text)
+        write_msg(uid, application_sent)
     except FileNotFoundError:
         write_msg(uid, not_available)
 
